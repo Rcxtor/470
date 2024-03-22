@@ -1,0 +1,334 @@
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+    font-family: 'Roboto', sans-serif;
+}
+
+.bottom
+{
+    display: none;
+}
+.cart
+{
+    display: none;
+}
+.main
+{
+    display: flex;
+    height: 830px;
+    
+}
+
+.side_nav{
+    width: 250px;
+    height: 830px;
+    background-color: rgb(35, 47, 71);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:flex-start;
+    gap: 10px;
+}
+
+.side_nav a
+{
+    color: white;
+    text-decoration: none;
+    padding: 25px 20px 25px 20px;
+    font-weight:900;
+    font-size: larger;
+    margin-top: 20px;
+}
+.side_nav a:hover
+{
+    color: rgb(241, 140, 7);
+    text-decoration-line: underline ;
+    text-underline-offset: 10px;
+    text-decoration-thickness:4px;
+    width: 180px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+}
+
+.side_nav a.active
+{
+    color: rgb(241, 140, 7);
+    text-decoration-line: underline ;
+    text-underline-offset: 10px;
+    text-decoration-thickness:4px;
+    width: 180px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+}
+
+.dash,.user,.inv,.noti
+{
+    display: none;
+    width: 84%;
+    padding: 10px;
+    margin-left: 15px;
+    overflow: auto;
+}
+.dash h1,.user h1,.inv h1,.noti h1
+{
+    color: rgb(241, 140, 7);
+    font-size: 30px;
+    display: flex;
+    justify-content: start;
+    padding: 10px 40px 10px 40px;
+    box-shadow: 0px 3px 5px rgb(219, 219, 219);
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+table
+{
+    margin-top: 20px;
+    border-collapse: collapse;
+    width: 100%;
+}
+th
+{
+    padding: 20px 35px 20px 35px;
+    text-align: left;
+    background-color: rgb(35, 47, 71);
+    color: white;
+}
+
+ td 
+{
+    padding: 35px;
+    text-align: left;
+}
+tr
+{
+    box-shadow: 0px 3px 5px rgb(180, 180, 180);
+    border-radius: 20px;
+}
+
+.btm 
+{
+  align-items: center;
+  background-color: #0A66C2;
+  border: 0;
+  border-radius: 20px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 480px;
+  min-height: 40px;
+  min-width: 0px;
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  touch-action: manipulation;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+}
+.btm:hover,.btm:focus 
+{ 
+  background-color: #16437E;
+  color: #ffffff;
+}
+
+.btn_add {
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid rgb(35, 47, 71);
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: rgb(35, 47, 71); /*#3B3B3B; */
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 20px 0px 0px 0px;
+  min-height: 60px;
+  min-width: 0;
+  outline: none;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 180px;
+}
+
+.btn_add:hover {
+  color: #fff;
+   background-color: rgb(35, 47, 71);  /*#1A1A1A; */
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.btn_add:active {
+  box-shadow: none;
+  transform: translateY(0);
+  background-color: #3b3b3b
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 998;
+}
+
+.cross
+{
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    background-color: rgb(255, 95, 95);
+    color: white;
+    font-weight: 600;
+    font-size: larger;
+}
+.add-inventory-form h2
+{
+    text-align: center;
+    padding-top: 20px;
+    font-size: 30px;
+    font-weight: 800;
+    color: orange;
+    text-decoration: underline;
+    text-underline-offset: 10px;
+    text-decoration-thickness:4px;
+}
+.add-inventory-form 
+{
+    position: absolute;
+    left: 25%;
+    width: 50%;
+    height: 50%;
+    border: 1px solid rgb(97, 97, 97);
+    z-index: 999;  
+    background-color: #faf6ef;
+    border-radius: 15px;
+}
+
+.form-group
+{
+    position: relative;
+    left: 280px;
+    top:40px;
+    padding: 20px 0px 10px 0px;
+}
+.form-group label
+{
+    font-size: 20px;
+    font-weight: 800;
+    color: #3b3b3b;
+    position: relative;
+    /* right:200px; */
+
+}
+.form-group input
+{
+    height: 30px;
+    width: 300px;
+    position: absolute;
+    left:80px;
+}
+.submit_btn
+{
+    position: absolute;
+    bottom: 20px;
+    left: 31.5%;
+    width: 400px;
+    height: 60px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    background-color: rgb(35, 47, 71);
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+}
+.submit_btn:hover
+{
+    background-color: rgb(41, 48, 61);
+}
+.submit_btn:active
+{
+    background-color: rgb(56, 64, 80);
+    transform: translateY(1.5px);
+}
+select 
+{
+    padding: 10px;
+    border: 2px solid silver;
+    border-radius: 5px;
+    background-color: #ffffff;
+    width: 310px;
+    height: 40px;
+    margin-left: 15px;
+}
+select option:checked {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+.inv .search
+{
+    position: absolute;
+    right:30px;
+    margin-top: 30px;
+}
+.inv .search input
+{
+    width: 400px;
+    height: 42px;
+    border-radius: 15px;
+    border: 2px solid rgb(35, 47, 71);
+    padding: 0px 0px 0px 20px;
+}
+.inv .search button
+{
+    background-color: white;
+    border: none;
+    text-decoration: none;
+    font-size: larger;
+    position: absolute;
+    right:20px;
+    top:10px;
+    color: silver;
+    font-weight: 900;
+}
+.inv .search button:hover,.inv .search button:active
+{
+    color:black;
+}
+
