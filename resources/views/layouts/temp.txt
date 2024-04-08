@@ -1,0 +1,8 @@
+<!-- <a href="{{ route('product.processor') }}">Processor</a>
+            <a href="{{ route('product.motherboard') }}">Motherboard</a>
+            <a href="{{ route('product.ram') }}">Ram</a>
+            <a href="{{ route('product.monitor') }}">Monitor</a>
+            <a href="{{ route('product.graphics') }}">Graphics Card</a>
+            <a href="{{ route('product.storage') }}">Storage</a>
+            <a href="{{ route('product.case') }}">Case</a>
+            <a href="{{ route('product.accessories') }}">Accessories</a> -->

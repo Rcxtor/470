@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('brand');
             $table->string('price');
             $table->string('type');
+            $table->string('quantity');
+            $table->string('warranty');
             $table->timestamps();
         });
 

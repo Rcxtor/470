@@ -34,6 +34,8 @@
                     <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
                         @csrf
                     </form>
+                    
+
                 @else
                     <a href="{{ route('login') }}">Log in</a>
                     @if (Route::has('register'))
@@ -45,14 +47,14 @@
         </span>
         </div>
         <div class="nav">
-            <a href="#">Processor</a>
-            <a href="#">Motherboard</a>
-            <a href="#">Ram</a>
-            <a href="#">Monitor</a>
-            <a href="#">Graphics Card</a>
-            <a href="#">Storage</a>
-            <a href="#">Case</a>
-            <a href="#">Accessories</a>
+            <a href="{{ route('products.category', 'processor') }}">Processor</a>
+            <a href="{{ route('products.category', 'motherboard') }}">Motherboard</a>
+            <a href="{{ route('products.category', 'ram') }}">Ram</a>
+            <a href="{{ route('products.category', 'monitor') }}">Monitor</a>
+            <a href="{{ route('products.category', 'graphics card') }}">Graphics Card</a>
+            <a href="{{ route('products.category', 'storage') }}">Storage</a>
+            <a href="{{ route('products.category', 'case') }}">Case</a>
+            <a href="{{ route('products.category', 'accessories') }}">Accessories</a>
         </div>
         <span class="cart">
             <a href="#">cart</a>

@@ -82,3 +82,21 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    const typeSelect = document.getElementById('type');
+    const formSections = document.querySelectorAll('.form-section');
+
+    typeSelect.addEventListener('change', function() {
+        const selectedType = this.value;
+
+        formSections.forEach(section => {
+            section.style.display = 'none';
+        });
+
+        const selectedFormSection = document.getElementById(selectedType + 'Form');
+        if (selectedFormSection) {
+            selectedFormSection.style.display = 'block';
+        }
+    });
+});

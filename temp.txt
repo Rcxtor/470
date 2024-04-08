@@ -34,3 +34,31 @@
         </div>
     </body>
 </html>
+
+
+
+<table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>brand</th>
+                <th>Price</th>
+                <th>Type</th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($products as $product)
+            <tr>
+                <td>{{ $product->id }}</td>
+                <td>{{ $product->name }}</td>
+                <td>{{ $product->brand }}</td>
+                <td>{{ $product->price }}</td>
+                <td>{{ $product->type }}</td>
+                <td><button class="btm">View</button></td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
