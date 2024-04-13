@@ -1,4 +1,4 @@
-
+// upto sidebar//
 // Get the dashboard link element
 const dashboardLink = document.querySelector('.dashboard-link');
 const userLink = document.querySelector('.user-link');
@@ -59,11 +59,10 @@ notificationLink.addEventListener('click', function(event) {
     userLink.classList.remove('active')
     this.classList.toggle('active');
 });
-
+// ------------------------------------------------//
 document.addEventListener('DOMContentLoaded', function() {
     const addInventoryButton = document.querySelector('.btn_add');
     const addInventoryForm = document.querySelector('.add-inventory-form');
-    const addInventorySubmit = document.querySelector('.submit_btn');
     const overlay = document.querySelector('.overlay');
     const cross = document.querySelector('.cross');
 
@@ -71,10 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
         addInventoryForm.style.display = addInventoryForm.style.display === 'block' ? 'none' : 'block';
         overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block';
 
-    });
-    addInventorySubmit.addEventListener('click', function() {
-        addInventoryForm.style.display = addInventoryForm.style.display === 'block' ? 'none' : 'block';
-        overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block';
     });
     cross.addEventListener('click', function() {
         addInventoryForm.style.display = addInventoryForm.style.display === 'block' ? 'none' : 'block';
@@ -90,10 +85,12 @@ document.addEventListener('DOMContentLoaded', function() {
     typeSelect.addEventListener('change', function() {
         const selectedType = this.value;
 
+        // Hide all form sections
         formSections.forEach(section => {
             section.style.display = 'none';
         });
 
+        // Show the form section corresponding to the selected product type
         const selectedFormSection = document.getElementById(selectedType + 'Form');
         if (selectedFormSection) {
             selectedFormSection.style.display = 'block';

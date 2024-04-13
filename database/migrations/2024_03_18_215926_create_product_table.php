@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use PhpParser\Node\NullableType;
 
 return new class extends Migration
 {
@@ -17,17 +18,19 @@ return new class extends Migration
             $table->string('brand');
             $table->string('price');
             $table->string('type');
-            $table->string('quantity');
-            $table->string('warranty');
+            $table->string('quantity')->nullable();
+            $table->string('warranty')->nullable();
             $table->timestamps();
         });
 
         Schema::create('processor', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('processor_id')->constrained('product')->onDelete('cascade');
+            $table->foreignId('processor_product_id')->constrained('product')->onDelete('cascade');
             $table->string('gen');
             $table->integer('core');
             $table->string('socket');
+            $table->timestamps();
+
         });
 
         Schema::create('motherboard', function (Blueprint $table) {
@@ -37,6 +40,8 @@ return new class extends Migration
             $table->string('processor');
             $table->string('socket');
             $table->string('ramtype');
+            $table->timestamps();
+
         });
 
         Schema::create('ram', function (Blueprint $table) {
@@ -45,42 +50,54 @@ return new class extends Migration
             $table->string('capacity');
             $table->string('ramtype');
             $table->string('speed');
+            $table->timestamps();
+
         });
 
         Schema::create('gpu', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('gpu_id')->constrained('product')->onDelete('cascade');
+            $table->foreignId('gpu_product_id')->constrained('product')->onDelete('cascade');
             $table->string('chipset');
             $table->string('memory');
+            $table->timestamps();
+
         });
 
         Schema::create('case', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('case_id')->constrained('product')->onDelete('cascade');
+            $table->foreignId('case_product_id')->constrained('product')->onDelete('cascade');
             $table->string('color');
+            $table->timestamps();
+
 
         });
 
         Schema::create('storage', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('storage_id')->constrained('product')->onDelete('cascade');
+            $table->foreignId('storage_product_id')->constrained('product')->onDelete('cascade');
             $table->string('interface');
             $table->string('capacity');
+            $table->timestamps();
+
 
         });
 
         Schema::create('monitor', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('monitor_id')->constrained('product')->onDelete('cascade');
+            $table->foreignId('monitor_product_id')->constrained('product')->onDelete('cascade');
             $table->string('size');
             $table->string('panel');
             $table->string('rate');
             $table->string('resolution');
+            $table->timestamps();
+
         });
 
         Schema::create('accessories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('acce_id')->constrained('product')->onDelete('cascade');
+            $table->foreignId('acce_product_id')->constrained('product')->onDelete('cascade');
+            $table->timestamps();
+
         });
 
     }

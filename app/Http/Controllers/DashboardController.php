@@ -6,6 +6,16 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Processor;
+use App\Models\Motherboard;
+use App\Models\Ram;
+use App\Models\Gpu;
+use App\Models\ComputerCase;
+use App\Models\Storage;
+use App\Models\Monitor;
+use App\Models\Accessories;
+
+
 use Illuminate\Support\Facades\URL;
 
 class DashboardController extends Controller
@@ -32,22 +42,22 @@ class DashboardController extends Controller
 {
     
     // Validate the form data
-    $validatedData = $request->validate([
-        'name' => 'required|string',
-        'brand' => 'required|string',
-        'price' => 'required|numeric',
-        'type' => 'required|string',
-    ]);
+    // $validatedData = $request->validate([
+    //     'name' => 'required|string',
+    //     'brand' => 'required|string',
+    //     'price' => 'required|numeric',
+    //     'type' => 'required|string',
+    // ]);
     
-    $existingProduct = Product::where('name', $request->name)
-                            ->where('brand', $request->brand)
-                            ->where('type', $request->type)
-                            ->first();
+    // $existingProduct = Product::where('name', $request->name)
+    //                         ->where('brand', $request->brand)
+    //                         ->where('type', $request->type)
+    //                         ->first();
 
-    if ($existingProduct) {
-        // Product already exists, return with error message
-        return redirect()->back()->with(['error' => 'Product already exists.']);
-    }
+    // if ($existingProduct) {
+    //     // Product already exists, return with error message
+    //     return redirect()->back()->with(['error' => 'Product already exists.']);
+    // }
 
     // Create a new product instance
     $product = new Product();
@@ -59,6 +69,32 @@ class DashboardController extends Controller
     // Save the product to the database
     $product->save();
 
+    switch ($request->type) {
+        case 'processor':
+            Processor::create(['processor_product_id' => $product->id, 'gen' => $request->gen, 'core' => $request->core, 'socket' => $request->socket]);
+            break;
+        case 'motherboard':
+            Motherboard::create(['motherboard_product_id' => $product->id, 'gen' => $request->gen, 'processor' => $request->processor, 'socket' => $request->socket, 'ramtype' => $request->ramtype]);
+            break;
+        case 'ram':
+            Ram::create(['ram_product_id' => $product->id, 'capacity' => $request->capacity, 'ramtype' => $request->ramtype, 'speed' => $request->speed]);
+            break;
+        case 'gpu':
+            Gpu::create(['gpu_product_id' => $product->id, 'chipset' => $request->chipset, 'memory' => $request->memory]);
+            break;
+        case 'case':
+            ComputerCase::create(['case_product_id' => $product->id, 'color' => $request->color]);
+            break;
+        case 'storage':
+            Storage::create(['storage_product_id' => $product->id, 'interface' => $request->interface, 'capacity' => $request->capacity]);
+            break;
+        case 'monitor':
+            Monitor::create(['monitor_product_id' => $product->id, 'size' => $request->size, 'panel' => $request->panel, 'rate' => $request->rate, 'resolution' => $request->resolution]);
+            break;
+        case 'accessories':
+            Accessories::create(['acce_product_id' => $product->id]);
+            break;
+    }
     // Redirect back with a success message
     return redirect()->back()->with(['success' => 'Product added successfully.']);
 }

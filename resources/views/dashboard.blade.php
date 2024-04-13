@@ -103,8 +103,27 @@
     <h2>Add Inventory</h2>
     <button class='cross'>x</button>
     
+    <form class=cont id="productForm" action="{{ route('Add Product') }}" method="POST">
+    @csrf
+    <div class="form-group">
+        <label for="type">Type: </label>
+        <select id="type" name="type" required>
+            <option value="processor">Processor</option>
+            <option value="motherboard">Motherboard</option>
+            <option value="ram">Ram</option>
+            <option value="gpu">Graphics Card</option>
+            <option value="case">Case</option>
+            <option value="storage">Storage</option>
+            <option value="monitor">Monitor</option>
+            <option value="accessories">Accessories</option>
+        </select>
+    </div>
+
+    <!-- Processor form section -->
+    <div id="processorForm" class="form-section" style="display: none;">
     <form class="cont" action="{{ route('Add Product') }}" method="POST">
         @csrf
+        <input type="hidden" name="type" value="processor"> 
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
@@ -117,38 +136,76 @@
             <label for="price">Price: </label>
             <input type="number" id="price" name="price" required>
         </div>
+
         <div class="form-group">
-            <label for="type">Type: </label>
-            <select id="type" name="type" required>
-                <option value="processor">Processor</option>
-                <option value="motherboard">Motherboard</option>
-                <option value="ram">Ram</option>
-                <option value="gpu">Graphics Card</option>
-                <option value="case">Case</option>
-                <option value="storage">Storage</option>
-                <option value="monitor">Monitor</option>
-                <option value="accessories">Accessories</option>
-            </select>
+            <label for="processorGen">Generation: </label>
+            <input type="text" id="processorGen" name="gen">
         </div>
-        <div class="form-section" id="processorForm" style="display: block;">
-                    <div class="form-group">
-                    <label for="name">Name: </label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="brand">Brand: </label>
-                    <input type="text" id="brand" name="brand" required>
-                </div>
-                <div class="form-group">
-                    <label for="price">Resolution: </label>
-                    <input type="number" id="price" name="price" required>
-                </div>
+        <div class="form-group">
+            <label for="processorCore">Core: </label>
+            <input type="text" id="processorCore" name="core">
         </div>
-        <div class="form-section" id="motherboardForm" style="display: none;">
-            <!-- Inputs specific to motherboard -->
+        <div class="form-group">
+            <label for="processorSocket">Socket: </label>
+            <input type="text" id="processorSocket" name="socket">
         </div>
-        <button class="submit_btn" type="submit">Add Inventory</button>
+        <button class="submit_btn" type="submit">Add Processor</button>
     </form>
+</div>
+
+<div id="motherboardForm" class="form-section" style="display: none;">
+    <form class="cont" action="{{ route('Add Product') }}" method="POST">
+        @csrf
+        <input type="hidden" name="type" value="motherboard"> 
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="brand">Brand: </label>
+            <input type="text" id="brand" name="brand" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Price: </label>
+            <input type="number" id="price" name="price" required>
+        </div>
+
+        <div class="form-group">
+            <label for="motherboardGen">Generation: </label>
+            <input type="text" id="motherboardGen" name="gen">
+        </div>
+        <div class="form-group">
+            <label for="motherboardProcessor">Processor: </label>
+            <input type="text" id="motherboardProcessor" name="processor">
+        </div>
+        <div class="form-group">
+            <label for="motherboardSocket">Socket: </label>
+            <input type="text" id="motherboardSocket" name="socket">
+        </div>
+        <div class="form-group">
+            <label for="motherboardRamtype">Ramtype: </label>
+            <input type="text" id="motherboardRamtype" name="ramtype">
+        </div>
+        <button class="submit_btn" type="submit">Add Motherboard</button>
+    </form>
+</div>
+
+<div id="ramForm" class="form-section" style="display: none;">
+    <div class="form-group">
+        <label for="ramCapacity">Capacity: </label>
+        <input type="text" id="ramCapacity" name="capacity" required>
+    </div>
+    <div class="form-group">
+        <label for="ramRamtye">Ramtype: </label>
+        <input type="text" id="ramRamtye" name="ramtype">
+    </div>
+    <div class="form-group">
+        <label for="ramSpeed">Speed: </label>
+        <input type="text" id="ramSpeed" name="speed">
+    </div>
+</div>
+    <!-- <button class="submit_btn" type="submit">Add Inventory</button> -->
+</form>
     </div>
     </div>
 
