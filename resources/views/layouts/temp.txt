@@ -1,238 +1,31 @@
-@if(session('error'))
-    <div class="error-message">
-        {{ session('error') }}
-    </div>
-@endif
-<x-app-layout>
-<link rel="stylesheet" href="../css/dashboard.css">
+// Inside your controller or service class
 
+use Illuminate\Support\Facades\Session;
 
-<div class="main">
-    <div class="side_nav">
-        <a href="{{ route('dashboard') }}" class="dashboard-link">Dashboard</a>
-        <a href="{{ route('dashboard') }}" class="user-link">User</a>
-        <a href="{{ route('dashboard') }}" class="inventory-link">Products</a>
-        <a href="{{ route('dashboard') }}" class="notification-link">Notification</a>
-    </div> 
-    <div class="dash" @if($searched_user==='yes' || $searched==='yes') style="display: None;" @else style="display: block;"@endif><h1>DASH</h1></div>
+public function addToCart(Request $request)
+{
+    // Fetch user information from session
+    $userId = Session::get('user_id');
+    $email = Session::get('email');
 
+    // Insert item into cart table
+    Cart::create([
+        'user_id' => $userId,
+        'email' => $email,
+        'item_name' => $request->item_name,
+        // Other item details...
+    ]);
 
-    <div class="user" @if($searched_user==='yes') style="display: block;" @endif>
-        <h1>USER</h1>
-        <div class="search_box">
-        <form action="{{ route('search_user') }}" method="GET">
-            <input type="text" name="query" placeholder="Search...">
-            <button class="user_btn" type="submit">&#x1F50E;&#xFE0E;</button>
-        </form>
-        </div>
-        <a href="{{ route('dashboard') }}">
-            <button class="reset_user" @if($searched_user==='yes') style="display: block;" @endif> Reset </button>
-        </a>
-        
-        <table>
-        <thead>
-            <tr>
-                <th>User ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>Role</th>
-                <th>Registration Date</th>
-                <th></th>
+    // Redirect to cart page or wherever appropriate
+}
 
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($users as $user)
-            <tr>
-                <td>{{ $user->id }}</td>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->phone }}</td>
-                <td>{{ $user->address }}</td>
-                <td>{{ $user->role }}</td>
-                <td>{{ $user->created_at }}</td>
-                <td><button class="btm">View</button></td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-    </div>
+public function completeOrder()
+{
+    // Fetch user information from session
+    $userId = Session::get('user_id');
 
-    <div class="inv" @if($searched==='yes') style="display: block;" @endif><h1>INVENTORY</h1>
-    <div class="for_inv">
-    <button class="btn_add">+ Add inventory</button>
-    <a href="{{ route('dashboard') }}">
-        <button class="reset_search" @if($searched==='yes') style="display: block;" @endif> Reset </button>
-    </a>
-    
-    <span class="search">
-    <form action="{{ route('search') }}" method="GET">
-        <input type="text" name="query" placeholder="Search...">
-        <button class="search_btn" type="submit">&#x1F50E;&#xFE0E;</button>
-    </form>
-    </span>
-    </div>
-    <table>
-        <thead>
-            <tr>
-                <th>Product ID</th>
-                <th>Name</th>
-                <th>Brand</th>
-                <th>Price</th>
-                <th>Type</th>
-                <th></th>
+    // Delete items from the cart table associated with the current user session
+    Cart::where('user_id', $userId)->delete();
 
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($products as $product)
-            <tr>
-                <td>{{ $product->id }}</td>
-                <td>{{ $product->name }}</td>
-                <td>{{ $product->brand }}</td>
-                <td>{{ $product->price }}</td>
-                <td>{{ $product->type }}</td>
-                <td><button class="btm">View</button></td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-    <div class="add-inventory-form" style="display: none;">
-    <h2>Add Inventory</h2>
-    <button class='cross'>x</button>
-    
-    <form class="cont" action="{{ route('Add Product') }}" method="POST">
-        @csrf
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <div class="form-group">
-            <label for="brand">Brand: </label>
-            <input type="text" id="brand" name="brand" required>
-        </div>
-        <div class="form-group">
-            <label for="price">Price: </label>
-            <input type="number" id="price" name="price" required>
-        </div>
-        <div class="form-group">
-            <label for="type">Type: </label>
-            <select id="type" name="type" required>
-                <option value="processor">Processor</option>
-                <option value="motherboard">Motherboard</option>
-                <option value="ram">Ram</option>
-                <option value="gpu">Graphics Card</option>
-                <option value="case">Case</option>
-                <option value="storage">Storage</option>
-                <option value="monitor">Monitor</option>
-                <option value="accessories">Accessories</option>
-            </select>
-        </div>
-        <div class="form-section" id="processorForm" style="display: block;">
-                <div class="form-group">
-                    <label for="genProcessor">Generation: </label>
-                    <input type="text" id="genProcessor" name="gen" required>
-                </div>
-                <div class="form-group">
-                    <label for="core">Core: </label>
-                    <input type="text" id="core" name="core" required>
-                </div>
-                <div class="form-group">
-                    <label for="socketProcessor">Socket: </label>
-                    <input type="text" id="socketProcessor" name="socket" required>
-                </div>
-        </div>
-        <div class="form-section" id="motherboardForm" style="display: none;">
-                <div class="form-group">
-                    <label for="genMotherboard">Generation: </label>
-                    <input type="text" id="genMotherboard" name="gen" required>
-                </div>
-                <div class="form-group">
-                    <label for="processor">Processor: </label>
-                    <input type="text" id="processor" name="processor" required>
-                </div>
-                <div class="form-group">
-                    <label for="socketMotherboard">Socket: </label>
-                    <input type="text" id="socketMotherboard" name="socket" required>
-                </div>
-                <div class="form-group">
-                    <label for="ramtype">Ramtype: </label>
-                    <input type="text" id="ramtype" name="ramtype" required>
-                </div>
-        <button class="" type="submit">Add Inventory</button>
-
-        </div>
-        <!-- <div class="form-section" id="ramForm" style="display: none;">
-                <div class="form-group">
-                    <label for="capacity">Capacity: </label>
-                    <input type="text" id="capacity" name="capacity" required>
-                </div>
-                <div class="form-group">
-                    <label for="ramtype">Ramtype: </label>
-                    <input type="text" id="ramtype" name="ramtype" required>
-                </div>
-                <div class="form-group">
-                    <label for="speed">Speed: </label>
-                    <input type="text" id="speed" name="speed" required>
-                </div>
-        </div>
-        <div class="form-section" id="gpuForm" style="display: none;">
-                <div class="form-group">
-                    <label for="chipset">Chipset: </label>
-                    <input type="text" id="chipset" name="chipset" required>
-                </div>
-                <div class="form-group">
-                    <label for="memory">Memory: </label>
-                    <input type="text" id="memory" name="memory" required>
-                </div>
-        </div>
-        <div class="form-section" id="caseForm" style="display: none;">
-                <div class="form-group">
-                    <label for="color">Color: </label>
-                    <input type="text" id="color" name="color" required>
-                </div>
-        </div>
-        <div class="form-section" id="storageForm" style="display: none;">
-                <div class="form-group">
-                    <label for="interface">Interface: </label>
-                    <input type="text" id="interface" name="interface" required>
-                </div>
-                <div class="form-group">
-                    <label for="capacity">Capacity: </label>
-                    <input type="text" id="capacity" name="capacity" required>
-                </div>
-        </div>
-        <div class="form-section" id="monitorForm" style="display: none;">
-                <div class="form-group">
-                    <label for="size">Size: </label>
-                    <input type="text" id="size" name="size" required>
-                </div>
-                <div class="form-group">
-                    <label for="panel">Panel: </label>
-                    <input type="text" id="panel" name="panel" required>
-                </div>
-                <div class="form-group">
-                    <label for="rate">Rate: </label>
-                    <input type="text" id="rate" name="rate" required>
-                </div>
-                <div class="form-group">
-                    <label for="resolution">Resolution: </label>
-                    <input type="text" id="resolution" name="resolution" required>
-                </div>
-        </div> -->
-
-    <button class="submit_btn" type="submit">Add Inventory</button>
-    </form>
-    </div>
-    </div>
-
-    <div class="noti"><h1>NOTIFICATION</h1></div>
-
-
-</div>
-<div class="overlay"></div>
-<script src="../js/dashboard.js"></script>
-</x-app-layout>
-
+    // Redirect to order confirmation page or wherever appropriate
+}

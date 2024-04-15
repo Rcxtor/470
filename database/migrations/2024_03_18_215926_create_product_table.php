@@ -27,7 +27,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('processor_product_id')->constrained('product')->onDelete('cascade');
             $table->string('gen');
-            $table->integer('core');
+            $table->string('core');
             $table->string('socket');
             $table->timestamps();
 
