@@ -138,6 +138,16 @@
         </div>
 
         <div class="form-group">
+            <label for="quantity">Quantity: </label>
+            <input type="text" id="quantity" name="quantity" required>
+        </div>
+
+        <div class="form-group">
+            <label for="warranty">Warranty: </label>
+            <input type="text" id="warranty" name="warranty">
+        </div>
+
+        <div class="form-group">
             <label for="processorGen">Generation: </label>
             <input type="text" id="processorGen" name="gen">
         </div>
@@ -168,6 +178,16 @@
         <div class="form-group">
             <label for="price">Price: </label>
             <input type="number" id="price" name="price" required>
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Quantity: </label>
+            <input type="text" id="quantity" name="quantity" required>
+        </div>
+
+        <div class="form-group">
+            <label for="warranty">Warranty: </label>
+            <input type="text" id="warranty" name="warranty">
         </div>
 
         <div class="form-group">
@@ -209,6 +229,16 @@
         </div>
 
         <div class="form-group">
+            <label for="quantity">Quantity: </label>
+            <input type="text" id="quantity" name="quantity" required>
+        </div>
+
+        <div class="form-group">
+            <label for="warranty">Warranty: </label>
+            <input type="text" id="warranty" name="warranty">
+        </div>
+
+        <div class="form-group">
             <label for="ramCapacity">Capacity: </label>
             <input type="text" id="ramCapacity" name="capacity">
         </div>
@@ -243,6 +273,16 @@
         </div>
 
         <div class="form-group">
+            <label for="quantity">Quantity: </label>
+            <input type="text" id="quantity" name="quantity" required>
+        </div>
+
+        <div class="form-group">
+            <label for="warranty">Warranty: </label>
+            <input type="text" id="warranty" name="warranty">
+        </div>
+
+        <div class="form-group">
             <label for="gpuChipset">Chipset: </label>
             <input type="text" id="gpuChipset" name="chipset">
         </div>
@@ -273,6 +313,16 @@
         </div>
 
         <div class="form-group">
+            <label for="quantity">Quantity: </label>
+            <input type="text" id="quantity" name="quantity" required>
+        </div>
+
+        <div class="form-group">
+            <label for="warranty">Warranty: </label>
+            <input type="text" id="warranty" name="warranty">
+        </div>
+
+        <div class="form-group">
             <label for="caseColor">Case Color: </label>
             <input type="text" id="caseColor" name="color">
         </div>
@@ -296,6 +346,16 @@
         <div class="form-group">
             <label for="price">Price: </label>
             <input type="number" id="price" name="price" required>
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Quantity: </label>
+            <input type="text" id="quantity" name="quantity" required>
+        </div>
+
+        <div class="form-group">
+            <label for="warranty">Warranty: </label>
+            <input type="text" id="warranty" name="warranty">
         </div>
 
         <div class="form-group">
@@ -326,6 +386,16 @@
         <div class="form-group">
             <label for="price">Price: </label>
             <input type="number" id="price" name="price" required>
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Quantity: </label>
+            <input type="text" id="quantity" name="quantity" required>
+        </div>
+
+        <div class="form-group">
+            <label for="warranty">Warranty: </label>
+            <input type="text" id="warranty" name="warranty">
         </div>
 
         <div class="form-group">
@@ -363,6 +433,16 @@
         <div class="form-group">
             <label for="price">Price: </label>
             <input type="number" id="price" name="price" required>
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Quantity: </label>
+            <input type="text" id="quantity" name="quantity" required>
+        </div>
+
+        <div class="form-group">
+            <label for="warranty">Warranty: </label>
+            <input type="text" id="warranty" name="warranty">
         </div>
 
         <button class="submit_btn" type="submit">Add Accessories</button>

@@ -65,8 +65,8 @@ class DashboardController extends Controller
     $product->brand = $request->brand;
     $product->price = $request->price;
     $product->type = $request->type;
-    // $product->type = $request->type;
-    // $product->type = $request->type;
+    $product->quantity = $request->quantity;
+    $product->warranty = $request->warranty;
  
     
     // Save the product to the database
