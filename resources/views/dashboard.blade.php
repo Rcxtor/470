@@ -120,7 +120,7 @@
     </div>
 
     <!-- Processor form section -->
-    <div id="processorForm" class="form-section" style="display: none;">
+    <div id="processorForm" class="form-section" style="display: block;">
     <form class="cont" action="{{ route('Add Product') }}" method="POST">
         @csrf
         <input type="hidden" name="type" value="processor"> 
@@ -190,21 +190,184 @@
     </form>
 </div>
 
+
 <div id="ramForm" class="form-section" style="display: none;">
-    <div class="form-group">
-        <label for="ramCapacity">Capacity: </label>
-        <input type="text" id="ramCapacity" name="capacity" required>
-    </div>
-    <div class="form-group">
-        <label for="ramRamtye">Ramtype: </label>
-        <input type="text" id="ramRamtye" name="ramtype">
-    </div>
-    <div class="form-group">
-        <label for="ramSpeed">Speed: </label>
-        <input type="text" id="ramSpeed" name="speed">
-    </div>
+    <form class="cont" action="{{ route('Add Product') }}" method="POST">
+        @csrf
+        <input type="hidden" name="type" value="ram"> 
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="brand">Brand: </label>
+            <input type="text" id="brand" name="brand" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Price: </label>
+            <input type="number" id="price" name="price" required>
+        </div>
+
+        <div class="form-group">
+            <label for="ramCapacity">Capacity: </label>
+            <input type="text" id="ramCapacity" name="capacity">
+        </div>
+        <div class="form-group">
+            <label for="ramType">Type: </label>
+            <input type="text" id="ramType" name="ramtype">
+        </div>
+        <div class="form-group">
+            <label for="ramSpeed">Speed: </label>
+            <input type="text" id="ramSpeed" name="speed">
+        </div>
+        <button class="submit_btn" type="submit">Add Ram</button>
+    </form>
 </div>
-    <!-- <button class="submit_btn" type="submit">Add Inventory</button> -->
+
+
+<div id="gpuForm" class="form-section" style="display: none;">
+    <form class="cont" action="{{ route('Add Product') }}" method="POST">
+        @csrf
+        <input type="hidden" name="type" value="graphics card"> 
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="brand">Brand: </label>
+            <input type="text" id="brand" name="brand" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Price: </label>
+            <input type="number" id="price" name="price" required>
+        </div>
+
+        <div class="form-group">
+            <label for="gpuChipset">Chipset: </label>
+            <input type="text" id="gpuChipset" name="chipset">
+        </div>
+        <div class="form-group">
+            <label for="gpuMemory">Memory: </label>
+            <input type="text" id="gpuMemory" name="memory">
+        </div>
+        <button class="submit_btn" type="submit">Add Graphics Card</button>
+    </form>
+</div>
+
+
+<div id="caseForm" class="form-section" style="display: none;">
+    <form class="cont" action="{{ route('Add Product') }}" method="POST">
+        @csrf
+        <input type="hidden" name="type" value="case"> 
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="brand">Brand: </label>
+            <input type="text" id="brand" name="brand" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Price: </label>
+            <input type="number" id="price" name="price" required>
+        </div>
+
+        <div class="form-group">
+            <label for="caseColor">Case Color: </label>
+            <input type="text" id="caseColor" name="color">
+        </div>
+        <button class="submit_btn" type="submit">Add Case</button>
+    </form>
+</div>
+
+
+<div id="storageForm" class="form-section" style="display: none;">
+    <form class="cont" action="{{ route('Add Product') }}" method="POST">
+        @csrf
+        <input type="hidden" name="type" value="storage"> 
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="brand">Brand: </label>
+            <input type="text" id="brand" name="brand" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Price: </label>
+            <input type="number" id="price" name="price" required>
+        </div>
+
+        <div class="form-group">
+            <label for="storageInterface">Interface: </label>
+            <input type="text" id="storageInterface" name="interface">
+        </div>
+        <div class="form-group">
+            <label for="storageCapacity">Capacity: </label>
+            <input type="text" id="storageCapacity" name="capacity">
+        </div>
+        <button class="submit_btn" type="submit">Add Storage</button>
+    </form>
+</div>
+
+
+<div id="monitorForm" class="form-section" style="display: none;">
+    <form class="cont" action="{{ route('Add Product') }}" method="POST">
+        @csrf
+        <input type="hidden" name="type" value="monitor"> 
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="brand">Brand: </label>
+            <input type="text" id="brand" name="brand" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Price: </label>
+            <input type="number" id="price" name="price" required>
+        </div>
+
+        <div class="form-group">
+            <label for="monitorSize">Size: </label>
+            <input type="text" id="monitorSize" name="size">
+        </div>
+        <div class="form-group">
+            <label for="monitorPanel">Panel: </label>
+            <input type="text" id="monitorPanel" name="panel">
+        </div>
+        <div class="form-group">
+            <label for="monitorRate">Rate: </label>
+            <input type="text" id="monitorRate" name="rate">
+        </div>
+        <div class="form-group">
+            <label for="monitorResolution">Resolution: </label>
+            <input type="text" id="monitorResolution" name="resolution">
+        </div>
+        <button class="submit_btn" type="submit">Add Monitor</button>
+    </form>
+</div>
+
+<div id="accessoriesForm" class="form-section" style="display: none;">
+    <form class="cont" action="{{ route('Add Product') }}" method="POST">
+        @csrf
+        <input type="hidden" name="type" value="accessories"> 
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="brand">Brand: </label>
+            <input type="text" id="brand" name="brand" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Price: </label>
+            <input type="number" id="price" name="price" required>
+        </div>
+
+        <button class="submit_btn" type="submit">Add Accessories</button>
+    </form>
+</div>
 </form>
     </div>
     </div>
