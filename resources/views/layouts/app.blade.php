@@ -57,7 +57,10 @@
             <a href="{{ route('products.category', 'accessories') }}">Accessories</a>
         </div>
         <span class="cart">
-            <a href="#">cart</a>
+            <a href="{{ route('cart') }}">Cart</a>
+        </span>
+        <span class="wish">
+            <a href="{{ route('wishlist') }}">Wishlist</a>
         </span>
             <main>
                 {{ $slot }}

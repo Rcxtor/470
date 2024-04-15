@@ -28,6 +28,12 @@ time, mark, audio, video {
 {
     display: none;
 }
+
+.wish
+{
+    display: none;
+}
+
 .main
 {
     display: flex;

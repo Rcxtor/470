@@ -19,7 +19,9 @@
                 <p>Brand: {{ $product->brand }}</p>
                 <p>Price: {{ $product->price }}</p>
                 <p>Type: {{ $product->type }}</p>
-                <button class="btm">Add To Cart</button>
+                <button>Add To Cart</button><!-- route system ta use kore controller diye add kore dis  -->
+                <button>Add To Wishlist</button> 
+
             </div>
         @endforeach
     @endif

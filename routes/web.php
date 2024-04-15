@@ -10,6 +10,8 @@ use App\Http\Controllers\ProductController;
 Route::get('/dashboard', [DashboardController::class, 'index'],)->name('dashboard');
 
 // Route::get('/product', function () {return view('product');})->name('product');
+Route::get('/cart', function () {return view('cart');})->name('cart');
+Route::get('/wishlist', function () {return view('wishlist');})->name('wishlist');
 
 
 Route::get('/', function () {return view('welcome');})->name('welcome');

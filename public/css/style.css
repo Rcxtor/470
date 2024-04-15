@@ -103,6 +103,40 @@ body {
 .cart:hover
 {
     background-color: #ffed84;
+    transform: translateY(-2px);
+}
+
+.cart:active
+{
+    transform: translateY(0);
+}
+
+.wish
+{
+    position: fixed;
+    bottom: 150px;
+    right: 40px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    padding: 25px 0px;
+    border-radius: 20px;
+    z-index: 1000;
+
+}
+.wish a 
+{
+    padding: 25px 20px;
+    text-decoration: none;
+}
+.wish:hover
+{
+    background-color: #ffed84;
+    transform: translateY(-2px);
+}
+
+.wish:active
+{
+    transform: translateY(0);
 }
 
 .bottom 

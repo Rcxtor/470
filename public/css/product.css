@@ -66,7 +66,7 @@ body
 .product-box 
 {
     width: 225px;
-    height: 320px;
+    height: 360px;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -117,6 +117,12 @@ body
 
 .product-box button:hover {
     background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.product-box button:active {
+    background-color: #0056b3;
+    transform: translateY(0px);
 }
 
 .product-box img
