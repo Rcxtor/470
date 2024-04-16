@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\WishlistController;
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'],)->name('dashboard');
