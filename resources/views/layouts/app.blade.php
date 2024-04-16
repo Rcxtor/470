@@ -55,9 +55,10 @@
             <a href="{{ route('products.category', 'storage') }}">Storage</a>
             <a href="{{ route('products.category', 'case') }}">Case</a>
             <a href="{{ route('products.category', 'accessories') }}">Accessories</a>
+      
         </div>
         <span class="cart">
-            <a href="{{ route('cart') }}">Cart</a>
+            <a href="{{url('cart') }}">Cart</a>
         </span>
         <span class="wish">
             <a href="{{ route('wishlist') }}">Wishlist</a>
@@ -68,5 +69,7 @@
         <div class="bottom">
             <h1>bottom</h1>
         </div>
+        
+    
     </body>
 </html>

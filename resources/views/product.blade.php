@@ -19,9 +19,21 @@
                 <p>Brand: {{ $product->brand }}</p>
                 <p>Price: {{ $product->price }}</p>
                 <p>Type: {{ $product->type }}</p>
-                <button>Add To Cart</button><!-- route system ta use kore controller diye add kore dis  -->
-                <button>Add To Wishlist</button> 
+                
+                <form action="{{url('AddCart',$product->id)}}" method="POST">
+                    @csrf
+                    <input type="number" value="1" min="1" max="4" class="form-control" style="width:50px" name="quantity">
+                    <br>
+                    <input class="cart_btn" type="submit" value="Add To Cart">
+                </form>
 
+                <form action="{{url('AddWishlist',$product->id)}}" method="POST">
+                    @csrf
+                    <input class="cart_btn" type="submit" value="Add to Wishlist">
+                </form>
+                
+                
+              
             </div>
         @endforeach
     @endif

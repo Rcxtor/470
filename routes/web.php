@@ -5,14 +5,27 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'],)->name('dashboard');
 
 // Route::get('/product', function () {return view('product');})->name('product');
-Route::get('/cart', function () {return view('cart');})->name('cart');
-Route::get('/wishlist', function () {return view('wishlist');})->name('wishlist');
+//###################################################endregion
+//######################################################
+Route::post('/AddCart/{id}',[CartController::class,'AddCart']);
+Route::post('/AddWishlist/{id}',[WishlistController::class,'AddCart']);
 
+
+Route::get('/cart', [CartController::class,'cart']);
+Route::get('/remove_cart/{id}', [CartController::class,'remove_cart']);
+
+
+
+
+Route::get('/wishlist', function () {return view('wishlist');})->name('wishlist');
+//############################################endregion
+//#####################################################
 
 Route::get('/', function () {return view('welcome');})->name('welcome');
 
