@@ -31,9 +31,7 @@ class CartController extends Controller
             $cart->price=$product->price;
             
             
-            $sold=$request->quantity;
-            $stock = $product->quantity;
-            $product->quantity=$stock-$sold;
+            
             $product->save();
 
             
