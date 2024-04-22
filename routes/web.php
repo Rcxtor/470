@@ -34,6 +34,8 @@ Route::post('stripe/{totalprice}',[CartController::class,'stripePost'])->name('s
 
 Route::get('/cash_order', [CartController::class,'cash_order']);
 
+Route::get('/send_email',[CartController::class,'index']);
+
 
 
 

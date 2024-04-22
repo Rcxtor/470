@@ -8,6 +8,9 @@ use App\Models\User;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Order;
+use App\Models\Invoice;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderMail;
 use Session;
 use Stripe;
 
@@ -84,6 +87,7 @@ class CartController extends Controller
         foreach($data as $data)
         {
            $order=new order;
+           $invoice=new invoice;
            $order->user_id=$pdata->id;
            $order->user_email=$pdata->email;
            $order->user_address=$pdata->address;
@@ -97,7 +101,39 @@ class CartController extends Controller
            $order->quantity=$data->item_quantity;
            $order->price=$data->price;
            $order->payment="cash";
+
+
+
+           
+           ####endregion
+           $invoice->user_id=$pdata->id;
+           $invoice->user_email=$pdata->email;
+           $invoice->user_name=$pdata->name;
+           $invoice->product_name=$data->item_name;          
+           $invoice->quantity=$data->item_quantity;
+           $invoice->price=$data->price;
+           $invoice->payment="cash";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
            $order->save();
+           $invoice->save();
 
 
            $product = Product::where('name', $data->item_name)->first();
@@ -127,7 +163,9 @@ class CartController extends Controller
 
         }
 
+        $this->sendemail($invoice);
         return redirect("login");
+        
 
     }
     
@@ -166,7 +204,7 @@ class CartController extends Controller
            
            $order->quantity=$data->item_quantity;
            $order->price=$data->price;
-           $order->payment="cash";
+           $order->payment="card";
            $order->save();
 
            $product = Product::where('name', $data->item_name)->first();
@@ -193,6 +231,17 @@ class CartController extends Controller
         return back();
     }
 
+    public function sendemail($invoice)
+    {
+    
+    
+    
+   
+    Mail::to($invoice->user_email)->send(new OrderMail($invoice));
+    $invoice->delete();
+    
+    
+    }   
 
 
 }
