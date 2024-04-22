@@ -8,9 +8,8 @@
 <body>
     
 <div class="container">
-
-    <h1> Pay Using Your Card - Total Amount  {{$totalprice}}  </h1>
-    
+   
+<h1>Pay Using Credit Card ${{$totalprice}}</h1>    
     
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -29,7 +28,7 @@
     
                     <form 
                             role="form" 
-                            action="{{route('stripe.post',$totalprice)}} 
+                            action="{{route('stripe.post',$totalprice) }}" 
                             method="post" 
                             class="require-validation"
                             data-cc-on-file="false"
@@ -79,7 +78,7 @@
     
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now (${{$totalprice}})</button>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now ($100)</button>
                             </div>
                         </div>
                             

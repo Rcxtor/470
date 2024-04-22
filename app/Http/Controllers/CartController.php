@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\Order;
 use Session;
 use Stripe;
 
@@ -33,6 +34,7 @@ class CartController extends Controller
             
             
             $product->save();
+            
 
             
             
@@ -54,25 +56,9 @@ class CartController extends Controller
     $cart = Cart::where('user_id', '=', $id)->get();
 
     return view("cart", compact('cart'));
-        if (auth()->check())
-        {
-            $id = Auth::user()->id;
-            $cart = Cart::where('user_id', '=', $id)->get();
-        return view("cart", compact('cart'));
-        }
-        else {
-        return redirect("login");
+        
     }
-        if (auth()->check())
-        {
-            $id = Auth::user()->id;
-            $cart = Cart::where('user_id', '=', $id)->get();
-        return view("cart", compact('cart'));
-        }
-        else {
-        return redirect("login");
-    }
-    }
+    
 
     public function remove_cart($id)
     {
@@ -86,10 +72,49 @@ class CartController extends Controller
         
         return view('stripe',compact('totalprice'));
     }
+
+    public function cash_order( )
+    {
+        $user=Auth::user();
+        $userid=$user->id;
+        
+        $data=cart::where('user_id','=',$userid)->get();
+        
+        $pdata=User::where('id','=',$userid)->first();
+        foreach($data as $data)
+        {
+           $order=new order;
+           $order->user_id=$pdata->id;
+           $order->user_email=$pdata->email;
+           $order->user_address=$pdata->address;
+           $order->user_phone=$pdata->phone;
+
+           
+
+   
+           $order->product_name=$data->item_name;
+           
+           $order->quantity=$data->item_quantity;
+           $order->price=$data->price;
+           $order->payment="cash";
+           $order->save();
+           
+           $cart_id=$data->id;
+           $cart=cart::find($cart_id);
+           $cart->delete();
+           $request->session()->flush();
+
+        }
+
+        return redirect("login");
+
+    }
     
     
     public function stripePost(Request $request,$totalprice)
     {
+        
+        dd($totalprice);
         
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
     
@@ -99,9 +124,14 @@ class CartController extends Controller
                 "source" => $request->stripeToken,
                 "description" => "Test payment." 
         ]);
+        
+        
+        
+
+        
       
-        Session::flash('success', 'Payment successful!');
-              
+        
+        Session::flash('success', 'Payment successful!');      
         return back();
     }
 

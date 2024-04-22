@@ -18,6 +18,7 @@ class CouponController extends Controller
     
     $coupon = Coupon::where('code', $couponCode)->first();
     
+    
 
     if ($coupon) {
       
