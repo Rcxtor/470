@@ -61,7 +61,7 @@
             <a href="{{url('cart') }}">Cart</a>
         </span>
         <span class="wish">
-            <a href="{{ route('wishlist') }}">Wishlist</a>
+            <a href="{{url('wishlist') }}">Wishlist</a>
         </span>
             <main>
                 {{ $slot }}

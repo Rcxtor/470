@@ -6,7 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
-
+use App\Http\Controllers\WishlistController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'],)->name('dashboard');
 
@@ -14,16 +14,18 @@ Route::get('/dashboard', [DashboardController::class, 'index'],)->name('dashboar
 //###################################################endregion
 //######################################################
 Route::post('/AddCart/{id}',[CartController::class,'AddCart']);
-Route::post('/AddWishlist/{id}',[WishlistController::class,'AddCart']);
+Route::post('/AddWishlist/{id}',[WishlistController::class,'AddWishlist']);
 
 
 Route::get('/cart', [CartController::class,'cart']);
 Route::get('/remove_cart/{id}', [CartController::class,'remove_cart']);
 
+Route::get('/wishlist', [WishlistController::class,'wishlist']);
+Route::get('/remove_wishlist/{id}', [WishlistController::class,'remove_wishlist']);
+Route::post('/wishlist_order/{id}', [WishlistController::class,'wishlist_order']);
 
 
 
-Route::get('/wishlist', function () {return view('wishlist');})->name('wishlist');
 //############################################endregion
 //#####################################################
 

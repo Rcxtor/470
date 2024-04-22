@@ -29,7 +29,7 @@
 
                 <form action="{{url('AddWishlist',$product->id)}}" method="POST">
                     @csrf
-                    <input class="cart_btn" type="submit" value="Add to Wishlist">
+                    <input class="wishlist_btn" type="submit" value="Add to Wishlist">
                 </form>
                 
                 
