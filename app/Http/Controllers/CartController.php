@@ -98,6 +98,27 @@ class CartController extends Controller
            $order->price=$data->price;
            $order->payment="cash";
            $order->save();
+
+
+           $product = Product::where('name', $data->item_name)->first();
+           if ($product) {
+                $product->quantity -= $data->item_quantity;
+                if ($product->quantity < 0) {
+                    $product->quantity = 0; // Ensure quantity doesn't go negative
+                }
+                $product->save();
+           }
+
+
+
+           
+           
+           
+
+
+           
+           
+           
            
            $cart_id=$data->id;
            $cart=cart::find($cart_id);
@@ -147,6 +168,15 @@ class CartController extends Controller
            $order->price=$data->price;
            $order->payment="cash";
            $order->save();
+
+           $product = Product::where('name', $data->item_name)->first();
+           if ($product) {
+                $product->quantity -= $data->item_quantity;
+                if ($product->quantity < 0) {
+                    $product->quantity = 0; // Ensure quantity doesn't go negative
+                }
+                $product->save();
+           }
            
            $cart_id=$data->id;
            $cart=cart::find($cart_id);
