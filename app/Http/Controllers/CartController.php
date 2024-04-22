@@ -56,6 +56,15 @@ class CartController extends Controller
     $cart = Cart::where('user_id', '=', $id)->get();
 
     return view("cart", compact('cart'));
+        if (auth()->check())
+        {
+            $id = Auth::user()->id;
+            $cart = Cart::where('user_id', '=', $id)->get();
+        return view("cart", compact('cart'));
+        }
+        else {
+        return redirect("login");
+    }
     }
 
     public function remove_cart($id)
