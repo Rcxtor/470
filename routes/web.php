@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\CouponController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'],)->name('dashboard');
 
@@ -24,9 +25,19 @@ Route::get('/wishlist', [WishlistController::class,'wishlist']);
 Route::get('/remove_wishlist/{id}', [WishlistController::class,'remove_wishlist']);
 Route::post('/wishlist_order/{id}', [WishlistController::class,'wishlist_order']);
 
+Route::post('/coupon', [CouponController::class,'coupon']);
 
 
-//############################################endregion
+Route::get('/stripe/{totalprice}',[CartController::class,'stripe']);
+Route::post('stripe/{totalprice}',[CartController::class,'stripePost'])->name('stripe.post');
+
+
+
+
+
+
+
+//############################################
 //#####################################################
 
 Route::get('/', function () {return view('welcome');})->name('welcome');

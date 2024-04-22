@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Cart;
 use App\Models\Product;
+use Session;
+use Stripe;
 
 
 class CartController extends Controller
@@ -27,6 +29,15 @@ class CartController extends Controller
             $cart->item_name=$product->name;
             $cart->item_quantity=$request->quantity;
             $cart->price=$product->price;
+            
+            
+            $sold=$request->quantity;
+            $stock = $product->quantity;
+            $product->quantity=$stock-$sold;
+            $product->save();
+
+            
+            
             $cart->save();
           
 
@@ -53,6 +64,29 @@ class CartController extends Controller
       $cart->delete();
       return redirect()->back();
 
+    }
+    public function stripe($totalprice)
+    {
+        
+        return view('stripe',compact('totalprice'));
+    }
+    
+    
+    public function stripePost(Request $request,$totalprice)
+    {
+        
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+    
+        Stripe\Charge::create ([
+                "amount" => $totalprice * 100,
+                "currency" => "usd",
+                "source" => $request->stripeToken,
+                "description" => "Test payment." 
+        ]);
+      
+        Session::flash('success', 'Payment successful!');
+              
+        return back();
     }
 
 

@@ -63,6 +63,7 @@ class WishlistController extends Controller
         // Retrieve authenticated user
         $user = auth()->user();
 
+
         // Find the product by ID
         $product = Product::find($id);
 
@@ -74,6 +75,15 @@ class WishlistController extends Controller
         $cart->item_name = $product->name;
         $cart->item_quantity = $request->wish_quantity;
         $cart->price = $product->price;
+        
+        $sold=$request->wish_quantity;
+        $stock = $product->quantity;
+        $product->quantity=$stock-$sold;
+        $product->save();
+
+
+        
+        
         $cart->save();
 
         // Find the wishlist by ID

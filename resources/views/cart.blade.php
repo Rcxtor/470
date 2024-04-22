@@ -158,7 +158,7 @@
                         </td>
                     </tr>
                     <!-- TOTAL PRICE CALCULATION -->
-                    <?php $totalprice=$totalprice + (($cart->item_price)*($cart->item_quantity)) ?>
+                    <?php $totalprice=$totalprice + (($cart->price)*($cart->item_quantity)) ?>
                     @endforeach
 
                 </tbody>
@@ -170,19 +170,62 @@
         <div class="t_sum">
             <table class="t_sumcontainer">
                 <tr>
-                    
-                    <td id="coupon"><label for="coupon"><strong>Coupon:</strong></label></td>
-                    <td><input type="coup" id="coup" name="coup" maxlength="6" placeholder="Enter 6 Digit Code"></td>
-                    <td> <button class="action-btnApply">Apply</button></td>
+                   
+                    <form id="couponForm" action="{{url('coupon')}}" method="POST">
+                      @csrf 
+                            
+                            <input type="hidden" name="total_price" value="{{ $totalprice }}">
+                            <td id="coupon"><label for="coupon"><strong>Coupon:</strong></label></td>
+                            <td><input type="coup" id="coup" name="coupon_code" maxlength="6" placeholder="Enter 6 Digit Code"></td>
+                            <td> <button class="action-btnApply">Apply</button></td>
+                    </form>        
                 </tr> 
-                <tr>   
-                    <td><strong>Subtotal:</strong></td>
-                    <td id="subtotal">{{$totalprice}} $</td>
+                
+                
+                
+                
+                <tr>
+                    @if(session()->has('discount'))
+                        <p>Code Applied: {{ session('couponCode') }}</p>
+                        <p>Your discount: {{ session('discount') }}</p>
+                        <p><strong>Subtotal</strong></p>
+                        <p id="subtotal">{{$totalprice}} $</p>
+                        <p><strong>New Subtotal</strong></p>
+                        <!-- Use a span with an id to dynamically update the new subtotal -->
+                        <p id="newSubtotal">{{$totalprice - session('discount')}} $</p>
+                        <?php $totalprice=$totalprice - session('discount')?>
                     
+                        <!-- Render other elements specific to discounted items -->
+                    
+                    @endif   
                 </tr>
             
             </table>
         </div>
+        <h3>Payment Method</h3>
+            <div class="payment">
+                <a href="{{url('cash_order')}}" class="checkout-link"><button class="checkout-btn">Cash on Delivery</button></a>
+
+                <a href="{{url('stripe',$totalprice)}}" class="checkout-link"><button class="checkout-btn">Card</button></a>
+            </div>
+        <script>
+            // Calculate subtotal dynamically
+            document.addEventListener('input', function (event) {
+                if (event.target.classList.contains('quantity-input')) {
+                    updateSubtotal();
+                }
+            });
+    
+            function updateSubtotal() {
+                const quantity = document.querySelector('.quantity-input').value;
+                const price = 19.99; // Replace with the actual price of the product
+                const subtotal = (quantity * price).toFixed(2);
+                document.getElementById('subtotal').textContent = '$' + subtotal;
+            }
+    
+            // Initial calculation on page load
+            updateSubtotal();
+        </script>
         
     </body>
     <!-- Style file lagle add kore nis public->css folder e 
