@@ -164,7 +164,7 @@ class CartController extends Controller
         }
 
         $this->sendemail($invoice);
-        return redirect("login");
+        return redirect()->back();
         
 
     }

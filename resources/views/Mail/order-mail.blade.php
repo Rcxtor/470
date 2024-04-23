@@ -1,22 +1,46 @@
-<table>
-    <thead>
-        <tr>
-            <th>Product Name</th>
-            <th>Product Quantity</th>
-            <th>Product Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php $totalprice = 0; ?>
-        @foreach($invoice as $invoiceItem)
-        <tr>
-            <?php $t_price = 0; ?>
-            <td>{{$invoiceItem->product_name}}</td>
-            <td>{{$invoiceItem->quantity}}</td>
-            <?php $t_price = $t_price + (($invoiceItem->price) * ($invoiceItem->quantity)) ?>
-            <td>{{$t_price}}</td>
-        </tr>
-        <?php $totalprice = $totalprice + (($invoiceItem->price) * ($invoiceItem->quantity)) ?>
-        @endforeach
-    </tbody>
-</table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+</head>
+<body>
+    <h2>Invoice</h2>
+    <p>Hello {{ $invoice->user_name }},</p>
+    <p>Your order has been successfully placed. Below is the invoice details:</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @php
+                $subtotal = 0;
+            @endphp
+            @foreach($invoice as $invoice)
+            <tr>
+                <td>{{ $invoice->product_name }}</td>
+                <td>{{ $invoice->quantity }}</td>
+                <td>{{ $invoice->price }}</td>
+                <td>{{ $invoice->quantity * $invoice->price }}</td>
+            </tr>
+            @php
+                $subtotal += $invoice->quantity * $invoice->price;
+            @endphp
+            @endforeach
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3"><strong>Subtotal</strong></td>
+                <td>{{ $subtotal }}</td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>
