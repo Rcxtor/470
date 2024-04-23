@@ -12,11 +12,11 @@
         <a href="{{ route('dashboard') }}" class="dashboard-link">Dashboard</a>
         <a href="{{ route('dashboard') }}" class="user-link">User</a>
         <a href="{{ route('dashboard') }}" class="inventory-link">Products</a>
-        <a href="{{ route('dashboard') }}" class="notification-link">Notification</a>
+        <a href="{{ route('dashboard') }}" class="notification-link">Orders</a>
     </div> 
-    <div class="dash" @if($searched_user==='yes' || $searched==='yes') style="display: None;" @else style="display: block;"@endif><h1>DASH</h1></div>
-
-
+    <div class="dash" @if($searched_user==='yes' || $searched==='yes') style="display: None;" @else style="display: block;"@endif><h1>DASH</h1>
+        <h2>{{ session('success') }}</h2>
+    </div>
     <div class="user" @if($searched_user==='yes') style="display: block;" @endif>
         <h1>USER</h1>
         <div class="search_box">
@@ -53,7 +53,7 @@
                 <td>{{ $user->address }}</td>
                 <td>{{ $user->role }}</td>
                 <td>{{ $user->created_at }}</td>
-                <td><button class="btm">View</button></td>
+                <td><a href="{{ route('user_view',['id' => $user->id]) }}"><button class="btm">View</button></a></td>
             </tr>
             @endforeach
         </tbody>
@@ -81,6 +81,7 @@
                 <th>Name</th>
                 <th>Brand</th>
                 <th>Price</th>
+                <th>Quantity</th>
                 <th>Type</th>
                 <th></th>
 
@@ -93,8 +94,9 @@
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->brand }}</td>
                 <td>{{ $product->price }}</td>
+                <td>{{ $product->quantity }}</td>
                 <td>{{ $product->type }}</td>
-                <td><button class="btm">View</button></td>
+                <td><a href="{{ route('product_update',['id' => $product->id]) }}"><button class="btm">View</button></a></td>
             </tr>
             @endforeach
         </tbody>
@@ -452,10 +454,38 @@
     </div>
     </div>
 
-    <div class="noti"><h1>NOTIFICATION</h1></div>
+    <div class="noti"><h1>ORDER</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Role</th>
+                <th>Registration Date</th>
+                <th></th>
 
-
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($orders as $order)
+            <tr>
+                <td>{{ $order->id }}</td>
+                <td>{{ $order->user_id }}</td>
+                <td>{{ $order->user_email }}</td>
+                <td>{{ $order->product_name }}</td>
+                <td>{{ $order->quantity }}</td>
+                <td>{{ $order->payment }}</td>
+                <td>{{ $order->created_at }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
+</div>
+
 <div class="overlay"></div>
 <script src="../js/dashboard.js"></script>
 </x-app-layout>

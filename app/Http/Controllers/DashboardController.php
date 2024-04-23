@@ -14,6 +14,8 @@ use App\Models\ComputerCase;
 use App\Models\Storage;
 use App\Models\Monitor;
 use App\Models\Accessories;
+use App\Models\Order;
+
 
 
 use Illuminate\Support\Facades\URL;
@@ -27,11 +29,12 @@ class DashboardController extends Controller
             // If user is admin, return dashboard view
             $users = User::all();
             $products = Product::all();
+            $orders  = Order::all();
             $searched = 'no';
             $searched_user = 'no';
             
 
-            return view('dashboard', ['users' => $users,'products' => $products,'searched'=>$searched,'searched_user'=>$searched_user]);
+            return view('dashboard', ['users' => $users,'products' => $products, 'orders'=>$orders,'searched'=>$searched,'searched_user'=>$searched_user]);
         } else {
             // If user is not admin, redirect to homepage or any other route
             return redirect()->route('welcome');
@@ -113,11 +116,12 @@ class DashboardController extends Controller
                     ->orWhereRaw('LOWER(brand) LIKE ?', ["%".strtolower($query)."%"])
                     ->get();
         $users = User::all();
+        $orders  = Order::all();
         $searched = 'yes';
         $searched_user = 'no';
         
 
-        return view('dashboard', ['users' => $users,'products' => $product,'searched'=>$searched,'searched_user'=>$searched_user]);
+        return view('dashboard', ['users' => $users,'products' => $product,'orders'=>$orders,'searched'=>$searched,'searched_user'=>$searched_user]);
     }
 
     public function search_user(Request $request)
@@ -131,10 +135,11 @@ class DashboardController extends Controller
                     ->orWhereRaw('LOWER(phone) LIKE ?', ["%".strtolower($query)."%"])
                     ->get();
         $product = Product::all();
+        $orders  = Order::all();
         $searched_user = 'yes';
         $searched = 'no';
         
-        return view('dashboard', ['users' => $users,'products' => $product,'searched_user'=>$searched_user,'searched'=>$searched]);
+        return view('dashboard', ['users' => $users,'products' => $product,'orders'=>$orders,'searched_user'=>$searched_user,'searched'=>$searched]);
     }
 
 }

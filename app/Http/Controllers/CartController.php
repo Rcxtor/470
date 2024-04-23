@@ -19,33 +19,28 @@ class CartController extends Controller
 {
     public function AddCart(Request $request ,$id)
     {
-        if (Auth::id())
+        if (Auth::check())
         {
             $user= auth()->user();
             $product=Product::find($id);
-           
-            
-            $cart= new Cart;
-            $cart->user_id=$user->id;
-            $cart->user_email=$user->email;
-            $cart->address=$user->address;
-            $cart->item_name=$product->name;
-            $cart->item_quantity=$request->quantity;
-            $cart->price=$product->price;
-            
-            
-            
-            $product->save();
-            
+            if ($request->quantity <= $product->quantity){
+                $cart= new Cart;
+                $cart->user_id=$user->id;
+                $cart->user_email=$user->email;
+                $cart->address=$user->address;
+                $cart->item_name=$product->name;
+                $cart->item_id=$id;        #
+                $cart->item_quantity=$request->quantity;
+                $cart->price=$product->price;
+                $product->save();
 
-            
-            
-            $cart->save();
-          
-
-            return redirect()->back();
+                $cart->save();
+                return redirect()->back();
+                }
+            else{
+                return redirect()->back()->with('error', 'Requested quantity exceeds available quantity.');
+            }
         }
-        
         else
         {
             return redirect("login");
@@ -91,12 +86,8 @@ class CartController extends Controller
            $order->user_email=$pdata->email;
            $order->user_address=$pdata->address;
            $order->user_phone=$pdata->phone;
-
-           
-
-   
            $order->product_name=$data->item_name;
-           
+           $order->product_id=$data->item_id;   #
            $order->quantity=$data->item_quantity;
            $order->price=$data->price;
            $order->payment="cash";

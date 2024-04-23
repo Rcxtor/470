@@ -8,10 +8,31 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\ProductUpdateController;
+use App\Http\Controllers\UserViewController;
+use App\Http\Controllers\ProductDetailsController;
+
 
 Route::get('/dashboard', [DashboardController::class, 'index'],)->name('dashboard');
 
-// Route::get('/product', function () {return view('product');})->name('product');
+// Route::get('/product_update/{name}', function () {return view('product_update');})->name('product_update');
+
+Route::get('/product_update/{id}', [ProductUpdateController::class, 'edit'])->name('product_update');
+Route::put('/product_update/{id}', [ProductUpdateController::class, 'update'])->name('product_update');
+Route::delete('/product_delete/{id}', [ProductUpdateController::class, 'delete'])->name('product_delete');
+
+Route::get('/user_view/{id}', [UserViewController::class, 'index'])->name('user_view');
+Route::delete('/user_view/{id}', [UserViewController::class, 'delete'])->name('user_delete');
+Route::put('/user_view/{id}', [UserViewController::class, 'update'])->name('user_view');
+
+Route::get('/productDetails/{id}', [ProductDetailsController::class, 'index'])->name('productDetails');
+
+
+
+// Route::get('/product_update', [DashboardController::class, 'index'],)->name('product_update');
+// Route::get('/product/{id}/update', [ProductController::class, 'edit'])->name('products_update');
+
+
 //###################################################endregion
 //######################################################
 Route::post('/AddCart/{id}',[CartController::class,'AddCart']);

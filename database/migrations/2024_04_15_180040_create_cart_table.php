@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('user_email')->nullable();
             $table->string('address')->nullable();
             $table->string('item_name')->nullable();
+            $table->string('item_id')->nullable();
             $table->string('item_quantity')->nullable();
             $table->string('price')->nullable();
             $table->timestamps();

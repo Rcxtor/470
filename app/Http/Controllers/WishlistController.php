@@ -73,6 +73,7 @@ class WishlistController extends Controller
         $cart->user_email = $user->email;
         $cart->address = $user->address;
         $cart->item_name = $product->name;
+        $cart->item_id = $product->id;
         $cart->item_quantity = $request->wish_quantity;
         $cart->price = $product->price;
         

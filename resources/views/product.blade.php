@@ -15,7 +15,8 @@
         @foreach($products as $product)
             <div class="product-box">
                 <img src="../image/product.jpg">
-                <h3>{{ $product->name }}</h3>
+                <!-- <h3>{{ $product->name }}</h3> -->
+                <a href="{{route('productDetails',$product->id)}}">{{ $product->name }}</a>
                 <p>Brand: {{ $product->brand }}</p>
                 <p>Price: {{ $product->price }}</p>
                 <p>Type: {{ $product->type }}</p>
@@ -26,7 +27,7 @@
                     <br>
                     <input class="cart_btn" type="submit" value="Add To Cart">
                 </form>
-
+                <h1>{{ session('error') }}</h1>
                 <form action="{{url('AddWishlist',$product->id)}}" method="POST">
                     @csrf
                     <input class="wishlist_btn" type="submit" value="Add to Wishlist">
