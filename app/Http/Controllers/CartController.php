@@ -21,7 +21,6 @@ class CartController extends Controller
     {
         if (Auth::id())
         {
-            
             $user= auth()->user();
             $product=Product::find($id);
            
