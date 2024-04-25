@@ -2,7 +2,19 @@
 <link rel="stylesheet" href="../css/product.css">
 <div class="main">
 <div class="side_bar">
+<h2>Filter By Brand</h2>
 
+    <form action="{{ route('products.category', ['category' => $category]) }}" method="GET">
+                @foreach($products as $product)
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="brands[]" value="{{ $product->brand }}" id="{{ $product->id }}">
+                        <label class="form-check-label" for="{{ $product->id }}">
+                            {{ $product->brand }}
+                        </label>
+                    </div>
+                @endforeach
+                <button type="submit" class="btn btn-primary">Apply Filter</button>
+            </form>
 </div>
 <div class="container">
 <span class="pr_type">

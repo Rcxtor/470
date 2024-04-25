@@ -15,7 +15,8 @@ use App\Models\Storage;
 use App\Models\Monitor;
 use App\Models\Accessories;
 use App\Models\Order;
-
+use App\Models\Coupon;
+use Illuminate\Http\RedirectResponse;
 
 
 use Illuminate\Support\Facades\URL;
@@ -30,11 +31,12 @@ class DashboardController extends Controller
             $users = User::all();
             $products = Product::all();
             $orders  = Order::all();
+            $coupons = Coupon::all();
             $searched = 'no';
             $searched_user = 'no';
             
 
-            return view('dashboard', ['users' => $users,'products' => $products, 'orders'=>$orders,'searched'=>$searched,'searched_user'=>$searched_user]);
+            return view('dashboard', ['users' => $users,'products' => $products,'coupons'=> $coupons, 'orders'=>$orders,'searched'=>$searched,'searched_user'=>$searched_user]);
         } else {
             // If user is not admin, redirect to homepage or any other route
             return redirect()->route('welcome');
@@ -116,12 +118,13 @@ class DashboardController extends Controller
                     ->orWhereRaw('LOWER(brand) LIKE ?', ["%".strtolower($query)."%"])
                     ->get();
         $users = User::all();
+        $coupons = Coupon::all();
         $orders  = Order::all();
         $searched = 'yes';
         $searched_user = 'no';
         
 
-        return view('dashboard', ['users' => $users,'products' => $product,'orders'=>$orders,'searched'=>$searched,'searched_user'=>$searched_user]);
+        return view('dashboard', ['users' => $users,'products' => $product,'coupons'=> $coupons,'orders'=>$orders,'searched'=>$searched,'searched_user'=>$searched_user]);
     }
 
     public function search_user(Request $request)
@@ -136,10 +139,31 @@ class DashboardController extends Controller
                     ->get();
         $product = Product::all();
         $orders  = Order::all();
+        $coupons = Coupon::all();
         $searched_user = 'yes';
         $searched = 'no';
         
-        return view('dashboard', ['users' => $users,'products' => $product,'orders'=>$orders,'searched_user'=>$searched_user,'searched'=>$searched]);
+        return view('dashboard', ['users' => $users,'products' => $product,'coupons'=> $coupons,'orders'=>$orders,'searched_user'=>$searched_user,'searched'=>$searched]);
     }
 
+    public function Add(Request $request)
+{
+    // Create a new coupon instance
+    $coupon = new Coupon();
+    $coupon->code = $request->code;
+    $coupon->type = $request->coupontype;
+    $coupon->value = $request->value;
+    $coupon->percent_off = $request->percent_off;
+  
+    // Save the product to the database
+    $coupon->save();
+    // Redirect back with a success message
+    return redirect()->back();
+}
+public function delete(Request $request, $id)
+    {
+        $coupon = Coupon::find($id);
+        $coupon->delete();
+        return redirect()->route('dashboard');
+    }
 }

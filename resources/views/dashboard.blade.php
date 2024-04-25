@@ -1,8 +1,3 @@
-@if(session('error'))
-    <div class="error-message">
-        {{ session('error') }}
-    </div>
-@endif
 <x-app-layout>
 <link rel="stylesheet" href="../css/dashboard.css">
 
@@ -15,7 +10,67 @@
         <a href="{{ route('dashboard') }}" class="notification-link">Orders</a>
     </div> 
     <div class="dash" @if($searched_user==='yes' || $searched==='yes') style="display: None;" @else style="display: block;"@endif><h1>DASH</h1>
-        <h2>{{ session('success') }}</h2>
+    @if(session('success'))
+        <script>
+            window.onload = function() {
+                alert("{{ session('success') }}");
+            }
+        </script>
+    @elseif(session('error'))
+    <script>
+            window.onload = function() {
+                alert("{{ session('error') }}");
+            }
+        </script>
+    @endif
+
+        <form action="{{route('Addcoupon')}}" method="POST">
+        @csrf
+            <input type="text" id="code" name="code" placeholder="Coupon Code." required>
+            <input type="number" style="width: 200px;" min="1" max="2" id="coupontype" name="coupontype" placeholder="Coupon Type" required>
+            <input type="number" id="value" name="value" placeholder="Coupon Value" >
+            <input type="number"  id="percent_off" name="percent_off" placeholder="Coupon Percentage" >
+            <button class="user_btn" type="submit">Add Coupon</button>
+        </form>
+        <a href="{{route('featuredProduct')}}">Add Feature Product</a>
+        <table>
+    <thead>
+        <tr>
+            <th>Coupon Code</th>
+            <th>Coupon Type</th>
+            <th>Coupon Value</th>
+            <th>Coupon Percentage</th>
+            <th>Coupon Created</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($coupons as $coupon)
+        <tr>
+            <td>{{ $coupon->code }}</td>
+            <td>{{ $coupon->type }}</td>
+            <td>{{ $coupon->value }}</td>
+            <td>{{ $coupon->percent_off }}</td>
+            <td>{{ $coupon->created_at }}</td>
+            <td>
+            <form action="{{ route('Deletecoupon', ['id' => $coupon->id]) }}" method="POST" id="deleteForm">
+                @csrf
+                @method('DELETE')
+                <button type="button" onclick="confirmDelete()" class="btm" style="background-color:rgb(255, 60, 20);">Delete</button>
+            </form>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+<script>
+    function confirmDelete() {
+        if (confirm("Are you sure you want to delete this coupon?")) {
+            document.getElementById('deleteForm').submit();
+        }
+    }
+</script>
+
     </div>
     <div class="user" @if($searched_user==='yes') style="display: block;" @endif>
         <h1>USER</h1>

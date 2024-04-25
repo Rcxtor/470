@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\ProviderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -11,7 +12,9 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\ProductUpdateController;
 use App\Http\Controllers\UserViewController;
 use App\Http\Controllers\ProductDetailsController;
-
+use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\FeatureProductController;
+use App\Http\Controllers\WelcomeController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'],)->name('dashboard');
 
@@ -48,6 +51,10 @@ Route::post('/wishlist_order/{id}', [WishlistController::class,'wishlist_order']
 
 Route::post('/coupon', [CouponController::class,'coupon']);
 
+// coupoun
+Route::post('/Addcoupon', [DashboardController::class,'Add'])->name('Addcoupon');
+Route::delete('/Deletecoupon/{id}', [DashboardController::class, 'delete'])->name('Deletecoupon');
+
 
 Route::get('/stripe/{totalprice}',[CartController::class,'stripe']);
 Route::post('stripe/{totalprice}',[CartController::class,'stripePost'])->name('stripe.post');
@@ -58,12 +65,23 @@ Route::get('/cash_order', [CartController::class,'cash_order']);
 Route::get('/send_email',[CartController::class,'index']);
 
 
+// Featured;
+Route::get('/featuredProduct',[FeatureProductController::class,'index'])->name('featuredProduct');
+Route::post('/Addfeatured', [FeatureProductController::class, 'store'])->name('Addfeatured');
+Route::delete('/DeleteFeatured/{id}', [FeatureProductController::class, 'delete'])->name('DeleteFeatured'); //
 
+// GOOGLE LOGIN
+Route::get('/auth/{provider}/redirect',[ProviderController::class, 'redirect']);
+ 
+Route::get('/auth/{provider}/callback',[ProviderController::class, 'callback'] );
 
 //############################################
 //#####################################################
 
-Route::get('/', function () {return view('welcome');})->name('welcome');
+//Welcome
+// Route::get('/', function () {return view('welcome');})->name('welcome');
+Route::get('/',[WelcomeController::class,'index'])->name('welcome');
+
 
 Route::get('/search', [DashboardController::class, 'search'])->name('search'); //search
 
@@ -73,6 +91,8 @@ Route::get('/search_user', [DashboardController::class, 'search_user'])->name('s
 Route::post('/Add Product', [DashboardController::class, 'store'])->name('Add Product'); //testing
 
 Route::get('/products/{category}', [ProductController::class, 'showByCategory'])->name('products.category');
+//filter
+Route::get('/products/{category}',[ProductController::class, 'showByCategory'])->name('products.category');
 
 
 Route::middleware('auth')->group(function () {
