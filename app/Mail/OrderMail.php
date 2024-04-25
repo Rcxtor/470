@@ -5,28 +5,26 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-use App\Models\invoice;
+use App\Models\Invoice;
 
 class OrderMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public invoice $invoice;
-
-   
     
-    public function __construct(invoice $invoice)
+    public  $invoice;
+    
+    
+    public function __construct( $invoice)
     {
-        $this->invoice= $invoice;
-        //
+        $this->invoice = $invoice;
+       
     }
- 
-
+    
     public function build()
     {
-        return $this -> subject('Order Confirmation')->view('mail.order-mail');
+        return $this->subject('Order Confirmation')->view('mail.order-mail',["invoice" => $this->invoice]);
+        
     }
 }

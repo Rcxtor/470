@@ -80,6 +80,7 @@ class CartController extends Controller
     {
         $user=Auth::user();
         $userid=$user->id;
+        $usermail=$user->email;
         
         $data=cart::where('user_id','=',$userid)->get();
         
@@ -163,7 +164,7 @@ class CartController extends Controller
 
         }
 
-        $this->sendemail($invoice);
+        $this->sendemail($usermail);
         return redirect()->back();
         
 
@@ -185,6 +186,7 @@ class CartController extends Controller
         ]);
         $user=Auth::user();
         $userid=$user->id;
+        $usermail=$user->email;
         
         $data=cart::where('user_id','=',$userid)->get();
         
@@ -231,14 +233,19 @@ class CartController extends Controller
         return back();
     }
 
-    public function sendemail($invoice)
+    public function sendemail($usermail)
     {
     
+    $invoice = Invoice::all();   
+    $emailContent = ['invoice' => $invoice];
     
+     
     
    
-    Mail::to($invoice->user_email)->send(new OrderMail($invoice));
-    $invoice->delete();
+    Mail::to($usermail)->send(new OrderMail($invoice));
+    
+    Invoice::truncate(); 
+    
     
     
     }   
