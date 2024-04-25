@@ -315,7 +315,7 @@
 <div id="gpuForm" class="form-section" style="display: none;">
     <form class="cont" action="{{ route('Add Product') }}" method="POST">
         @csrf
-        <input type="hidden" name="type" value="graphics card"> 
+        <input type="hidden" name="type" value="gpu"> <!-- -->
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>

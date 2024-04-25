@@ -51,7 +51,7 @@
             <a href="{{ route('products.category', 'motherboard') }}">Motherboard</a>
             <a href="{{ route('products.category', 'ram') }}">Ram</a>
             <a href="{{ route('products.category', 'monitor') }}">Monitor</a>
-            <a href="{{ route('products.category', 'graphics card') }}">Graphics Card</a>
+            <a href="{{ route('products.category', 'gpu') }}">Graphics Card</a>
             <a href="{{ route('products.category', 'storage') }}">Storage</a>
             <a href="{{ route('products.category', 'case') }}">Case</a>
             <a href="{{ route('products.category', 'accessories') }}">Accessories</a>
