@@ -108,31 +108,31 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('accessories', function (Blueprint $table) {
-            $table->dropForeign(['acce_id']);
+            $table->dropForeign(['acce_product_id']);
         });
 
         Schema::dropIfExists('accessories');
 
         Schema::table('monitor', function (Blueprint $table) {
-            $table->dropForeign(['monitor_id']);
+            $table->dropForeign(['monitor_product_id']);
         });
 
         Schema::dropIfExists('monitor');
 
         Schema::table('storage', function (Blueprint $table) {
-            $table->dropForeign(['storage_id']);
+            $table->dropForeign(['storage_product_id']);
         });
 
         Schema::dropIfExists('storage');
 
         Schema::table('case', function (Blueprint $table) {
-            $table->dropForeign(['case_id']);
+            $table->dropForeign(['case_product_id']);
         });
 
         Schema::dropIfExists('case');
 
         Schema::table('gpu', function (Blueprint $table) {
-            $table->dropForeign(['gpu_id']);
+            $table->dropForeign(['gpu_product_id']);
         });
 
         Schema::dropIfExists('gpu');
@@ -150,7 +150,7 @@ return new class extends Migration
         Schema::dropIfExists('motherboard');
 
         Schema::table('processor', function (Blueprint $table) {
-            $table->dropForeign(['processor_id']);
+            $table->dropForeign(['processor_product_id']);
         });
 
         Schema::dropIfExists('processor');

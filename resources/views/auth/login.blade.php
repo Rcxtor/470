@@ -43,5 +43,6 @@
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
+        <a href="/auth/google/redirect">GOOGLE</a>
     </form>
 </x-guest-layout>
