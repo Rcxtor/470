@@ -150,12 +150,13 @@ class CartController extends Controller
            $cart_id=$data->id;
            $cart=cart::find($cart_id);
            $cart->delete();
-           $request->session()->flush();
+        //    $request->session()->flush();/
+            session()->forget('discount');
 
         }
 
         $this->sendemail($usermail);
-        return redirect()->back();
+        return redirect('/')->with('success', 'Your Order Has Been Placed.'); //
         
 
     }
@@ -211,7 +212,9 @@ class CartController extends Controller
            $cart_id=$data->id;
            $cart=cart::find($cart_id);
            $cart->delete();
-           $request->session()->flush();
+        //    $request->session()->flush();
+            session()->forget('discount');
+
         
         
         
