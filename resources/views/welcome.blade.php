@@ -15,7 +15,9 @@
                 @endauth
             </nav>
         @endif
-
+    <div class="meme">
+    <img src ="../image/meme.jpg">
+    </div>
     <div class="box">
     <span class="pr_type" style="width: 150vh;">
     <h1 style="color: rgb(241, 140, 7);">SI Fuad's Choice</h1> 

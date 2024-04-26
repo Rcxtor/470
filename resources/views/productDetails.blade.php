@@ -5,7 +5,7 @@
 </div>
 
     <div class="container">
-    <div class="img-box"><img src="../image/product.jpg"></div>
+    <div class="img-box"><img src="../image/meme.jpg"></div>
     <div style="flex-direction: row; margin:50px 10px 100px 10px;">
     <div class="common">
         <h2>{{$product->name}}</h2>
