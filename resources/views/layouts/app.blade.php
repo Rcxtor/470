@@ -11,7 +11,7 @@
     <body>
         <div class="top">
             <span class="icon">
-            <a href="{{route('welcome')}}"><img src="../image/home.jpg"></a>
+            <a href="{{route('welcome')}}"><img src="../image/icon.jpg"></a>
             </span>
             <span class="search">
             <form class="navbar-form" method="post" name="form1">
@@ -69,7 +69,9 @@
                 {{ $slot }}
             </main>
         <div class="bottom">
-            <h1>bottom</h1>
+            <h1><strong>Contact US:</strong> 01763011488</h1>
+            <h1><strong>Email: shahidul.islam.fuad@g.bracu.ac.bd:</strong> 01763011488</h1>
+
         </div>
         
     
