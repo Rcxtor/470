@@ -110,7 +110,7 @@ class DashboardController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('query');
-        
+        // dd($query); 
         // Perform the search query using Eloquent
         $product = Product::whereRaw('LOWER(name) LIKE ?', ["%".strtolower($query)."%"])
                     ->orWhere('id', $query)
@@ -166,4 +166,16 @@ public function delete(Request $request, $id)
         $coupon->delete();
         return redirect()->route('dashboard');
     }
+
+    public function orderChange(Request $request, $id)
+    {
+        $validatedUserData = $request->validate([
+            'stage' => 'required|string|max:255',
+        ]);
+
+        $order = Order::find($id);
+        $order->update($validatedUserData);
+    return redirect()->back()->with('change', 'User updated successfully');
+    }
+
 }

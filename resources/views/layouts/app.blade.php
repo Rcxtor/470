@@ -29,7 +29,9 @@
                     @if(auth()->user()->role === 'admin')
                         <a href="{{ url('/dashboard') }}">Dashboard</a>
                     @endif
-                    <a href="{{route('profile.edit')}}"> {{ __('Profile') }} </a>                                                   
+
+                    <a href="{{route('profile.show')}}">Profile</a>                                                   
+                    
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Log Out') }}</a>
                     <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
                         @csrf

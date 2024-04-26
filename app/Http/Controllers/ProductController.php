@@ -59,21 +59,6 @@ class ProductController extends Controller
     $selectedGchip = $request->input('Gchip');
     $selectedGmem = $request->input('Gmem');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     if ($selectedBrands && count($selectedBrands) > 0) {
         // Filter products by selected brands
         $products = Product::whereIn('brand', $selectedBrands)->where('type', $category)->get();

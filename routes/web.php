@@ -55,6 +55,15 @@ Route::post('/coupon', [CouponController::class,'coupon']);
 Route::post('/Addcoupon', [DashboardController::class,'Add'])->name('Addcoupon');
 Route::delete('/Deletecoupon/{id}', [DashboardController::class, 'delete'])->name('Deletecoupon');
 
+Route::get('/search', [DashboardController::class, 'search'])->name('search'); //search
+
+Route::get('/search_user', [DashboardController::class, 'search_user'])->name('search_user'); //search
+
+
+Route::post('/Add Product', [DashboardController::class, 'store'])->name('Add Product'); //testing
+
+Route::put('/orderChange/{id}', [DashboardController::class, 'orderChange'])->name('orderChange'); //order
+
 
 Route::get('/stripe/{totalprice}',[CartController::class,'stripe']);
 Route::post('stripe/{totalprice}',[CartController::class,'stripePost'])->name('stripe.post');
@@ -83,23 +92,33 @@ Route::get('/auth/{provider}/callback',[ProviderController::class, 'callback'] )
 Route::get('/',[WelcomeController::class,'index'])->name('welcome');
 
 
-Route::get('/search', [DashboardController::class, 'search'])->name('search'); //search
+// Route::get('/search', [DashboardController::class, 'search'])->name('search'); //search
 
-Route::get('/search_user', [DashboardController::class, 'search_user'])->name('search_user'); //search
+// Route::get('/search_user', [DashboardController::class, 'search_user'])->name('search_user'); //search
 
 
-Route::post('/Add Product', [DashboardController::class, 'store'])->name('Add Product'); //testing
+// Route::post('/Add Product', [DashboardController::class, 'store'])->name('Add Product'); //testing
 
 Route::get('/products/{category}', [ProductController::class, 'showByCategory'])->name('products.category');
 //filter
 Route::get('/products/{category}',[ProductController::class, 'showByCategory'])->name('products.category');
 
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// Profile
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/orders', [ProfileController::class, 'orders'])->name('profile.orders');
+    Route::post('/profile/updatePassword', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
+    Route::post('/profile/updateEmail', [ProfileController::class, 'updateEmail'])->name('profile.updateEmail');
+
 });
+
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 require __DIR__.'/auth.php';
 

@@ -18,8 +18,8 @@
                 <strong>Filter By Generation</strong>
                 @foreach($processors as $processor)
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="Pgens[]" value="{{ $processor->gen }}" id="{{ $processor->processor_product_id }}">
-                        <label class="form-check-label" for="{{ $processor->processor_product_id }}">
+                        <input class="form-check-input" type="checkbox" name="Pgens[]" value="{{ $processor->gen }}" >
+                        <label>
                             {{ $processor->gen }}
                         </label>
                     </div>

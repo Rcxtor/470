@@ -520,7 +520,7 @@
                 <th>Address</th>
                 <th>Role</th>
                 <th>Registration Date</th>
-                <th></th>
+                <th>Order Stage</th>
 
             </tr>
         </thead>
@@ -534,6 +534,20 @@
                 <td>{{ $order->quantity }}</td>
                 <td>{{ $order->payment }}</td>
                 <td>{{ $order->created_at }}</td>
+                <td>
+                <form  action="{{ route('orderChange', ['id' => $order->id]) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div>
+                    <select name="stage" id="stage">
+                        <option value="processing" {{ $order->stage === 'processing' ? 'selected' : '' }}>processing</option>
+                        <option value="confirm" {{ $order->stage === 'confirm' ? 'selected' : '' }}>confirm</option>
+                        <option value="canceled" {{ $order->stage === 'canceled' ? 'selected' : '' }}>canceled</option>
+                    </select>
+                </div>
+                <button type="submit">Update Order</button>
+                </form>
+                </td>
             </tr>
             @endforeach
         </tbody>

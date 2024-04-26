@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('quantity');
             $table->string('price');
             $table->string('payment');
+            $table->enum('stage',['confirm','processing','canceled'])->default('processing');
             $table->timestamps();
         });
     }
